@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake.Interfaces
+namespace Snake.BLL.Model
 {
-    public interface ISnakeService
+    class Сoordinates
     {
-
     }
 }

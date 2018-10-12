@@ -1,1 +1,1 @@
-# Snake-Repository
+# Snake game

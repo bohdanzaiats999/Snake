@@ -11,9 +11,9 @@ namespace Snake.ViewModel
 {
     public class SnakeViewModel
     {
-        ISnakeService snakeService;
+        ISnakeManager snakeService;
         public event PropertyChangedEventHandler PropertyChanged;
-        public SnakeViewModel(ISnakeService snakeService)
+        public SnakeViewModel(ISnakeManager snakeService)
         {
             this.snakeService = snakeService;
         }

@@ -1,13 +1,12 @@
-﻿using Snake.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake.Services
+namespace Snake.Interfaces
 {
-    public class SnakeService : ISnakeService
+    public interface ISnakeManager
     {
 
     }
