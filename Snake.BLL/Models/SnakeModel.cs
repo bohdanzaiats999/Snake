@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Snake.BLL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake.Model
+namespace Snake.BLL.Models
 {
-    class SnakeModel
+   public class SnakeModel
     {
-        public int Length { get; set; }
-        public int Сoordinates { get; set; }
+        public List<SnakeBodyPartModel> Bodyes { get; set; }
     }
 }

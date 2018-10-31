@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Snake.BLL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Snake.BLL.Model
+namespace Snake.BLL.Models
 {
-    class SnakeBody
+   public class SnakeBodyPartModel
     {
+        public СoordinatesModel Сoordinates { get; set; }
+        public Direction Direction { get; set; }
     }
 }
