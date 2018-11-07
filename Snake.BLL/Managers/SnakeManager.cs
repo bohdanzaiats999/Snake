@@ -1,54 +1,132 @@
 ﻿using Snake.BLL.Models;
+using Snake.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.CompilerServices;
 
 namespace Snake.BLL.Managers
 {
-    public class SnakeManager
+    public class SnakeManager : INotifyPropertyChanged
     {
         private SnakeModel snake;
         private PlayFieldModel playField;
+        private RelayCommand moveUpwardCommand;
+        private RelayCommand moveDownwardCommand;
+        private RelayCommand moveLeftwardCommand;
+        private RelayCommand moveRightwardCommand;
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public SnakeManager()
         {
             playField = new PlayFieldModel();
 
-            snake = new SnakeModel
+            snake = new SnakeModel { Bodyes = new LinkedList<SnakeBodyPartModel>() };
+            snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(20, 20), Direction = Direction.Upward });
+            snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(40, 40), Direction = Direction.Upward });
+            snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(60, 60), Direction = Direction.Upward });
+        }
+        public void OnPropertyChanged([CallerMemberName]string prop = "")
+        {
+            if (PropertyChanged != null)
             {
-                Bodyes = new List<SnakeBodyPartModel>
-                {
-                    new SnakeBodyPartModel{Сoordinates = new СoordinatesModel(0,0), Direction = Direction.Upward},
-                    new SnakeBodyPartModel{Сoordinates = new СoordinatesModel(0,1), Direction = Direction.Upward},
-                    new SnakeBodyPartModel{Сoordinates = new СoordinatesModel(0,2), Direction = Direction.Upward}
-                }
-            };
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+
+            }
         }
         public void СoordinatesChanger()
         {
-            foreach (var body in snake.Bodyes)
+            var last = snake.Bodyes.Last();
+            if (snake.Bodyes.First().Direction == Direction.Upward)
             {
-                var coordinate = body.Сoordinates;
-
-                if (body.Direction == Direction.Upward)
+                last.Сoordinates.X = +20;
+            }
+            else if (snake.Bodyes.Last().Direction == Direction.Downward)
+            {
+                last.Сoordinates.X = -20;                
+            }
+            else if (snake.Bodyes.Last().Direction == Direction.Leftward)
+            {
+                last.Сoordinates.Y = +20;                
+            }
+            else if (snake.Bodyes.Last().Direction == Direction.Rightward)
+            {
+                last.Сoordinates.X = +20;
+            }
+            snake.Bodyes.AddBefore(snake.Bodyes.Find(snake.Bodyes.First()), last);
+            snake.Bodyes.RemoveLast();
+        }
+        public RelayCommand MoveUpwardCommand
+        {
+            get
+            {
+                return moveUpwardCommand ?? (moveUpwardCommand = new RelayCommand(obj =>
                 {
-                    coordinate.X++;
-                }
-                else if (body.Direction == Direction.Downward)
+                    try
+                    {
+                        snake.Bodyes.Last().Direction = Direction.Upward;
+                        СoordinatesChanger();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }));
+            }
+        }
+        public RelayCommand MoveDownwardCommand
+        {
+            get
+            {
+                return moveDownwardCommand ?? (moveDownwardCommand = new RelayCommand(obj =>
                 {
-                    coordinate.X--;
-                }
-                else if (body.Direction == Direction.Leftward)
+                    try
+                    {
+                        snake.Bodyes.Last().Direction = Direction.Downward;
+                        СoordinatesChanger();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }));
+            }
+        }
+        public RelayCommand MoveRightwardCommand
+        {
+            get
+            {
+                return moveRightwardCommand ?? (moveRightwardCommand = new RelayCommand(obj =>
                 {
-                    coordinate.Y++;
-                }
-                else if (body.Direction == Direction.Rightward)
+                    try
+                    {
+                        snake.Bodyes.Last().Direction = Direction.Rightward;
+                        СoordinatesChanger();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }));
+            }
+        }
+        public RelayCommand MoveLeftwardCommand
+        {
+            get
+            {
+                return moveLeftwardCommand ?? (moveLeftwardCommand = new RelayCommand(obj =>
                 {
-                    coordinate.Y--;
-                }
-                body.Сoordinates = coordinate;
+                    try
+                    {
+                        snake.Bodyes.Last().Direction = Direction.Leftward;
+                        СoordinatesChanger();
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message);
+                    }
+                }));
             }
         }
     }

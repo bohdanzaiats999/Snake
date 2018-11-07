@@ -9,6 +9,6 @@ namespace Snake.BLL.Models
 {
    public class SnakeModel
     {
-        public List<SnakeBodyPartModel> Bodyes { get; set; }
+        public LinkedList<SnakeBodyPartModel> Bodyes { get; set; }
     }
 }
