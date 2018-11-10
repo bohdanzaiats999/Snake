@@ -37,24 +37,25 @@ namespace Snake.BLL.Managers
         }
         public void СoordinatesChanger()
         {
-            var last = snake.Bodyes.Last();
+            var first = snake.Bodyes.First();
             if (snake.Bodyes.First().Direction == Direction.Upward)
             {
-                last.Сoordinates.X = +20;
+                first.Сoordinates.X += Properties.Settings.Default.Step;
             }
-            else if (snake.Bodyes.Last().Direction == Direction.Downward)
+            else if (snake.Bodyes.First().Direction == Direction.Downward)
             {
-                last.Сoordinates.X = -20;                
+                first.Сoordinates.X -= Properties.Settings.Default.Step;                
             }
-            else if (snake.Bodyes.Last().Direction == Direction.Leftward)
+            else if (snake.Bodyes.First().Direction == Direction.Leftward)
             {
-                last.Сoordinates.Y = +20;                
+                first.Сoordinates.Y += Properties.Settings.Default.Step;                
             }
-            else if (snake.Bodyes.Last().Direction == Direction.Rightward)
+            else if (snake.Bodyes.First().Direction == Direction.Rightward)
             {
-                last.Сoordinates.X = +20;
+                first.Сoordinates.Y -= Properties.Settings.Default.Step;
             }
-            snake.Bodyes.AddBefore(snake.Bodyes.Find(snake.Bodyes.First()), last);
+            first.Direction = Direction.None;
+            snake.Bodyes.AddBefore(snake.Bodyes.Find(snake.Bodyes.First()), first);
             snake.Bodyes.RemoveLast();
         }
         public RelayCommand MoveUpwardCommand

@@ -8,6 +8,7 @@ namespace Snake.BLL.Models
 {
     public enum Direction
     {
+        None,
         Rightward,
         Downward,
         Leftward,
