@@ -5,5 +5,17 @@
     <Setting Name="Step" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">20</Value>
     </Setting>
+    <Setting Name="MaxXFieldLength" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="MaxYFieldLength" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="MinXFieldLength" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="MinYFieldLength" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

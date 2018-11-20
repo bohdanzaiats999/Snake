@@ -45,6 +45,7 @@
     <Compile Include="Managers\SnakeManager.cs" />
     <Compile Include="Interfaces\ISnakeManager.cs" />
     <Compile Include="Models\Direction.cs" />
+    <Compile Include="Models\FruitModel.cs" />
     <Compile Include="Models\PlayFieldModel.cs" />
     <Compile Include="Models\SnakeBodyPartModel.cs" />
     <Compile Include="Models\SnakeModel.cs" />

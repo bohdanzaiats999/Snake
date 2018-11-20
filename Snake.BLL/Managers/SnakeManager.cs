@@ -12,6 +12,7 @@ namespace Snake.BLL.Managers
     {
         private SnakeModel snake;
         private PlayFieldModel playField;
+        private FruitModel fruit;
         private RelayCommand moveUpwardCommand;
         private RelayCommand moveDownwardCommand;
         private RelayCommand moveLeftwardCommand;
@@ -21,12 +22,13 @@ namespace Snake.BLL.Managers
         public SnakeManager()
         {
             playField = new PlayFieldModel();
-
+            fruit = new FruitModel();
             snake = new SnakeModel { Bodyes = new LinkedList<SnakeBodyPartModel>() };
             snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(20, 20), Direction = Direction.Upward });
             snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(40, 40), Direction = Direction.Upward });
             snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(60, 60), Direction = Direction.Upward });
         }
+
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
@@ -35,29 +37,47 @@ namespace Snake.BLL.Managers
 
             }
         }
+
+        public SnakeModel GetSnake()
+        {
+            return snake;
+        }
+
         public void СoordinatesChanger()
         {
             var first = snake.Bodyes.First();
-            if (snake.Bodyes.First().Direction == Direction.Upward)
+            // Coordinates X++
+            if (snake.Bodyes.First().Direction == Direction.Upward &&
+                first.Сoordinates.X + Properties.Settings.Default.Step < Properties.Settings.Default.MaxXFieldLength)
             {
                 first.Сoordinates.X += Properties.Settings.Default.Step;
             }
-            else if (snake.Bodyes.First().Direction == Direction.Downward)
+            // Coordinates Y++
+            else if (snake.Bodyes.First().Direction == Direction.Leftward
+                && first.Сoordinates.Y + Properties.Settings.Default.Step < Properties.Settings.Default.MaxYFieldLength)
             {
-                first.Сoordinates.X -= Properties.Settings.Default.Step;                
+                first.Сoordinates.Y += Properties.Settings.Default.Step;
             }
-            else if (snake.Bodyes.First().Direction == Direction.Leftward)
+            // Coordinates X--
+            else if (snake.Bodyes.First().Direction == Direction.Downward
+                && first.Сoordinates.X - Properties.Settings.Default.Step > Properties.Settings.Default.MinXFieldLength)
             {
-                first.Сoordinates.Y += Properties.Settings.Default.Step;                
+                first.Сoordinates.X -= Properties.Settings.Default.Step;
             }
-            else if (snake.Bodyes.First().Direction == Direction.Rightward)
+            // Coordinates Y--
+            else if (snake.Bodyes.First().Direction == Direction.Rightward
+                && first.Сoordinates.Y - Properties.Settings.Default.Step > Properties.Settings.Default.MinYFieldLength)
             {
                 first.Сoordinates.Y -= Properties.Settings.Default.Step;
             }
-            first.Direction = Direction.None;
+            else
+            {
+                throw new Exception("Outside play field");
+            }
             snake.Bodyes.AddBefore(snake.Bodyes.Find(snake.Bodyes.First()), first);
             snake.Bodyes.RemoveLast();
         }
+
         public RelayCommand MoveUpwardCommand
         {
             get
@@ -66,7 +86,7 @@ namespace Snake.BLL.Managers
                 {
                     try
                     {
-                        snake.Bodyes.Last().Direction = Direction.Upward;
+                        snake.Bodyes.First().Direction = Direction.Upward;
                         СoordinatesChanger();
                     }
                     catch (Exception ex)
@@ -76,6 +96,7 @@ namespace Snake.BLL.Managers
                 }));
             }
         }
+
         public RelayCommand MoveDownwardCommand
         {
             get
@@ -84,7 +105,7 @@ namespace Snake.BLL.Managers
                 {
                     try
                     {
-                        snake.Bodyes.Last().Direction = Direction.Downward;
+                        snake.Bodyes.First().Direction = Direction.Downward;
                         СoordinatesChanger();
                     }
                     catch (Exception ex)
@@ -94,6 +115,7 @@ namespace Snake.BLL.Managers
                 }));
             }
         }
+
         public RelayCommand MoveRightwardCommand
         {
             get
@@ -102,7 +124,7 @@ namespace Snake.BLL.Managers
                 {
                     try
                     {
-                        snake.Bodyes.Last().Direction = Direction.Rightward;
+                        snake.Bodyes.First().Direction = Direction.Rightward;
                         СoordinatesChanger();
                     }
                     catch (Exception ex)
@@ -120,7 +142,7 @@ namespace Snake.BLL.Managers
                 {
                     try
                     {
-                        snake.Bodyes.Last().Direction = Direction.Leftward;
+                        snake.Bodyes.First().Direction = Direction.Leftward;
                         СoordinatesChanger();
                     }
                     catch (Exception ex)
