@@ -52,6 +52,7 @@ namespace Snake.BLL.Managers
             {
                 first.Сoordinates.X += Properties.Settings.Default.Step;
             }
+
             // Coordinates Y++
             else if (snake.Bodyes.First().Direction == Direction.Leftward
                 && first.Сoordinates.Y + Properties.Settings.Default.Step < Properties.Settings.Default.MaxYFieldLength)
@@ -74,8 +75,14 @@ namespace Snake.BLL.Managers
             {
                 throw new Exception("Outside play field");
             }
+            // Create new first body part
             snake.Bodyes.AddBefore(snake.Bodyes.Find(snake.Bodyes.First()), first);
-            snake.Bodyes.RemoveLast();
+
+            if (first.Сoordinates.X != fruit.Сoordinates.X && 
+                first.Сoordinates.Y != fruit.Сoordinates.Y)
+            {
+                snake.Bodyes.RemoveLast();
+            }
         }
 
         public RelayCommand MoveUpwardCommand
