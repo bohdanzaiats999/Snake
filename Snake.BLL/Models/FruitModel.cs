@@ -11,8 +11,11 @@ namespace Snake.BLL.Models
         public FruitModel()
         {
             Random coordinates = new Random();
-            Сoordinates.X = coordinates.Next(Properties.Settings.Default.MinXFieldLength, Properties.Settings.Default.MaxXFieldLength);
-            Сoordinates.Y = coordinates.Next(Properties.Settings.Default.MinYFieldLength, Properties.Settings.Default.MaxYFieldLength);
+            Сoordinates = new СoordinatesModel()
+            {
+                X = coordinates.Next(Properties.Settings.Default.MinXFieldLength, Properties.Settings.Default.MaxXFieldLength),
+                Y = coordinates.Next(Properties.Settings.Default.MinYFieldLength, Properties.Settings.Default.MaxYFieldLength)
+            };
         }
         public СoordinatesModel Сoordinates { get; set; }
     }

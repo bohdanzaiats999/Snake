@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Snake.BLL.Managers;
+using Snake.Interfaces;
 
 namespace Snake.App
 {
@@ -23,7 +25,7 @@ namespace Snake.App
         public MainWindow()
         {
             InitializeComponent();
-
+            ISnakeManager snake = new SnakeManager();
         }
     }
 }

@@ -10,10 +10,10 @@ namespace Snake.Interfaces
     public interface ISnakeManager
     {
         void СoordinatesChanger();
-        RelayCommand MoveUpwardCommand { get; set; }
-        RelayCommand MoveDownwardCommand { get; set; }
-        RelayCommand MoveRightwardCommand { get; set; }
-        RelayCommand MoveLeftwardCommand { get; set; }
+        RelayCommand MoveUpwardCommand { get; }
+        RelayCommand MoveDownwardCommand { get; }
+        RelayCommand MoveRightwardCommand { get; }
+        RelayCommand MoveLeftwardCommand { get; }
 
     }
 }

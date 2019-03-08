@@ -10,10 +10,10 @@ namespace Snake.BLL.Models
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public СoordinatesModel(int x,int y)
+        public СoordinatesModel(int x = 0, int y = 0)
         {
-            this.X = x;
-            this.Y = y;
+            X = x;
+            Y = y;
         }
     }
 }
