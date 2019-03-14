@@ -10,6 +10,5 @@ namespace Snake.BLL.Models
    public class SnakeBodyPartModel
     {
         public СoordinatesModel Сoordinates { get; set; }
-        public Direction Direction { get; set; }
     }
 }

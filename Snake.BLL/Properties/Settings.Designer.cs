@@ -25,7 +25,7 @@ namespace Snake.BLL.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
         public int Step {
             get {
                 return ((int)(this["Step"]));
@@ -47,24 +47,6 @@ namespace Snake.BLL.Properties {
         public int MaxYFieldLength {
             get {
                 return ((int)(this["MaxYFieldLength"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int MinXFieldLength {
-            get {
-                return ((int)(this["MinXFieldLength"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int MinYFieldLength {
-            get {
-                return ((int)(this["MinYFieldLength"]));
             }
         }
     }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Snake.BLL.Managers;
+using Snake.BLL.Models;
 using Snake.Interfaces;
 
 namespace Snake.App
@@ -22,10 +23,35 @@ namespace Snake.App
     /// </summary>
     public partial class MainWindow : Window
     {
+        ISnakeManager snake;
         public MainWindow()
         {
             InitializeComponent();
-            ISnakeManager snake = new SnakeManager();
+            snake = new SnakeManager();
+
+            foreach (var body in snake.GetSnake().Bodyes)
+            {
+                PaintSnake(body.Сoordinates);
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                snake.СoordinatesChanger();
+            }
+        }
+        // Paint snake body part
+        private void PaintSnake(СoordinatesModel coordinates)
+        {
+            Image image = new Image
+            {
+                Source = new BitmapImage(new Uri(Properties.Settings.Default.SnakeBodyImage, UriKind.Relative)),
+                Height = 10,
+                Width = 10
+            };
+            Canvas.SetTop(image, coordinates.Y);
+            Canvas.SetLeft(image, coordinates.X);
+            SnakeCanvas.Children.Add(image);
+
         }
     }
 }

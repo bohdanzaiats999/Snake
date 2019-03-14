@@ -15,10 +15,10 @@ namespace Snake.BLL.Models
 
         public PlayFieldModel()
         {
-            this.MaxX = Properties.Settings.Default.MinXFieldLength;
-            this.MaxY = Properties.Settings.Default.MinYFieldLength;
-            this.MinX = Properties.Settings.Default.MaxXFieldLength;
-            this.MinY = Properties.Settings.Default.MaxYFieldLength;
+            MaxX = Properties.Settings.Default.MaxXFieldLength;
+            MaxY = Properties.Settings.Default.MaxYFieldLength;
+            MinX = 0;
+            MinY = 0;
         }
     }
 }

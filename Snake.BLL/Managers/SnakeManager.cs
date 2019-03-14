@@ -19,6 +19,7 @@ namespace Snake.BLL.Managers
         private RelayCommand moveLeftwardCommand;
         private RelayCommand moveRightwardCommand;
         public event PropertyChangedEventHandler PropertyChanged;
+        public Direction direction;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
             if (PropertyChanged != null)
@@ -39,16 +40,17 @@ namespace Snake.BLL.Managers
             playField = new PlayFieldModel();
             fruit = new FruitModel();
             snake = new SnakeModel { Bodyes = new LinkedList<SnakeBodyPartModel>() };
-            snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(40, 60), Direction = Direction.Upward });
-            snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(60, 60), Direction = Direction.Upward });
-            snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(80, 60), Direction = Direction.Upward });
-        }
 
+            snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(110, 110) });
+            snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(100, 110) });
+            snake.Bodyes.AddFirst(new SnakeBodyPartModel { Сoordinates = new СoordinatesModel(90, 110) });
+        }
+        // Change coordinats snake body parts
         public void СoordinatesChanger()
         {
+            direction = Direction.Upward;
             var first = new SnakeBodyPartModel
             {
-                Direction = snake.Bodyes.First().Direction,
                 Сoordinates = new СoordinatesModel
                 {
                     X = snake.Bodyes.First().Сoordinates.X,
@@ -56,28 +58,29 @@ namespace Snake.BLL.Managers
                 }
             };
             // Coordinates X++
-            if (snake.Bodyes.First().Direction == Direction.Upward &&
+            if (direction == Direction.Upward &&
                 first.Сoordinates.X + Properties.Settings.Default.Step < Properties.Settings.Default.MaxXFieldLength)
             {
                 first.Сoordinates.X += Properties.Settings.Default.Step;
             }
             // Coordinates Y++
-            else if (snake.Bodyes.First().Direction == Direction.Leftward
+            else if (direction == Direction.Leftward
                 && first.Сoordinates.Y + Properties.Settings.Default.Step < Properties.Settings.Default.MaxYFieldLength)
             {
                 first.Сoordinates.Y += Properties.Settings.Default.Step;
             }
             // Coordinates X--
-            else if (snake.Bodyes.First().Direction == Direction.Downward
-                && first.Сoordinates.X - Properties.Settings.Default.Step > Properties.Settings.Default.MinXFieldLength)
+            else if (direction == Direction.Downward
+                && first.Сoordinates.X - Properties.Settings.Default.Step > 0)
             {
                 first.Сoordinates.X -= Properties.Settings.Default.Step;
             }
             // Coordinates Y--
-            else if (snake.Bodyes.First().Direction == Direction.Rightward
-                && first.Сoordinates.Y - Properties.Settings.Default.Step > Properties.Settings.Default.MinYFieldLength)
+            else if (direction == Direction.Rightward
+                && first.Сoordinates.Y - Properties.Settings.Default.Step > 0)
             {
                 first.Сoordinates.Y -= Properties.Settings.Default.Step;
+
             }
             else
             {
@@ -105,7 +108,7 @@ namespace Snake.BLL.Managers
                 {
                     try
                     {
-                        snake.Bodyes.First().Direction = Direction.Upward;
+                        direction = Direction.Upward;
                     }
                     catch (Exception ex)
                     {
@@ -122,7 +125,7 @@ namespace Snake.BLL.Managers
                 {
                     try
                     {
-                        snake.Bodyes.First().Direction = Direction.Downward;
+                        direction = Direction.Downward;
                     }
                     catch (Exception ex)
                     {
@@ -139,7 +142,7 @@ namespace Snake.BLL.Managers
                 {
                     try
                     {
-                        snake.Bodyes.First().Direction = Direction.Rightward;
+                        direction = Direction.Rightward;
                     }
                     catch (Exception ex)
                     {
@@ -156,7 +159,7 @@ namespace Snake.BLL.Managers
                 {
                     try
                     {
-                        snake.Bodyes.First().Direction = Direction.Leftward;
+                        direction = Direction.Leftward;
                     }
                     catch (Exception ex)
                     {

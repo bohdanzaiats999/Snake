@@ -13,8 +13,8 @@ namespace Snake.BLL.Models
             Random coordinates = new Random();
             Сoordinates = new СoordinatesModel()
             {
-                X = coordinates.Next(Properties.Settings.Default.MinXFieldLength, Properties.Settings.Default.MaxXFieldLength),
-                Y = coordinates.Next(Properties.Settings.Default.MinYFieldLength, Properties.Settings.Default.MaxYFieldLength)
+                X = coordinates.Next(0, Properties.Settings.Default.MaxXFieldLength),
+                Y = coordinates.Next(0, Properties.Settings.Default.MaxYFieldLength)
             };
         }
         public СoordinatesModel Сoordinates { get; set; }

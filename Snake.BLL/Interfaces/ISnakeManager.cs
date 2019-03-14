@@ -1,4 +1,5 @@
-﻿using Snake.ViewModel;
+﻿using Snake.BLL.Models;
+using Snake.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace Snake.Interfaces
 {
     public interface ISnakeManager
     {
+        SnakeModel GetSnake();
         void СoordinatesChanger();
         RelayCommand MoveUpwardCommand { get; }
         RelayCommand MoveDownwardCommand { get; }
